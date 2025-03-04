@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 export default function Details() {
   return (
     <main className="p-6 max-w-2xl mx-auto">
@@ -41,12 +43,12 @@ export default function Details() {
 
         {/* Buttons */}
         <div className="mt-6 flex justify-between px-2 max-w-sm mx-auto">
-          <button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
+          <Button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
             Cancel
-          </button>
-          <button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
+          </Button>
+          <Button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
             Done
-          </button>
+          </Button>
         </div>
       </section>
     </main>

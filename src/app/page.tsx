@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -38,9 +39,9 @@ export default function Home() {
             a few clicks.
           </p>
 
-          <button className="bg-black text-white px-20 py-1 rounded-lg text-lg hover:bg-gray-800 transition-colors duration-300">
+          <Button className="bg-black text-white px-20 py-1 rounded-lg text-lg hover:bg-gray-800 transition-colors duration-300">
             Try it out
-          </button>
+          </Button>
         </div>
 
         {/* Network Visualization Section */}
