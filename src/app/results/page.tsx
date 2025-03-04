@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Details() {
   return (
-    <main className="p-6 max-w-2xl mx-auto">
+    <main className="p-6 max-w-2xl mx-auto flex flex-col justify-center min-h-screen">
       {/* Box around all content */}
       <section className="bg-gray-100 p-16 rounded-2xl shadow-md">
         {/* Centered Title */}
