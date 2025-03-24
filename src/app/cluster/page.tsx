@@ -1,9 +1,57 @@
 "use client";
 
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/form';
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import axios from 'axios';
+
+const formSchema = z.object({
+  link: z.string().nonempty('Link is required'),
+});
 
 export default function Home() {
+  // Defined form
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      link: '',
+      //
+    },
+  });
+
+  // Submit handler.
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    alert('Form submitted!');
+    console.log(values);
+
+    try {
+      const data = axios({
+        method: 'post',
+        url: 'http://127.0.0.1:5000/api/cluster/',
+        data: {
+          link: { values },
+          //
+        },
+      });
+
+      console.log(data);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    } finally {
+
+    }
+  }
+
   return (
     <main className="p-6 max-w-2xl mx-auto flex flex-col justify-center min-h-screen">
       {/* Box around all content */}
@@ -13,16 +61,32 @@ export default function Home() {
           <h1 className="text-2xl font-bold">ClusterForm</h1>
         </div>
 
-        {/* Form Content */}
-        <div className="mt-6 max-w-sm mx-auto space-y-6">
-          <Input
-            placeholder="Paste your Google Sheet link here"
-            className="w-full p-4 text-lg border border-gray-300 rounded-lg"
-          />
-          <Button className="w-full bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
-            Submit
-          </Button>
-        </div>
+        <Form {...form}>
+          {/* Form Content */}
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className='mt-6 max-w-sm mx-auto space-y-6'>
+              <FormField
+                control={form.control}
+                name='link'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        className='w-full p-4 text-lg border border-gray-300 rounded-lg'
+                        placeholder='Place your Google Sheet link here'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button className='w-full bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800'>
+                Submit
+              </Button>
+            </div>
+          </form>
+        </Form>
       </section>
     </main>
   );
