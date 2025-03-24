@@ -1,7 +1,13 @@
+"use client"
+
 import React from "react";
 import { Button } from "@/components/ui/button";
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <main className="flex items-center justify-center min-h-screen bg-gray-100 relative overflow-hidden">
       {/* Background Decorative Elements */}
@@ -39,18 +45,21 @@ export default function Home() {
             a few clicks.
           </p>
 
-          <Button className="bg-black text-white px-20 py-1 rounded-lg text-lg hover:bg-gray-800 transition-colors duration-300">
+          <Button onClick={() => router.push('/details')}
+ className="bg-black text-white px-20 py-1 rounded-lg text-lg hover:bg-gray-800 transition-colors duration-300">
             Try it out
           </Button>
         </div>
 
         {/* Network Visualization Section */}
         <div className="w-1/2 flex justify-center items-center">
-          <img
-            src="/images/landing-page.png"
-            alt="Network visualization"
-            className="max-w-full h-auto object-contain"
-          />
+          <Image
+              src='/images/landing-page.png'
+              alt='Network visualization'
+              width={500}
+              height={500}
+              className='max-w-full h-auto object-contain'
+            />
         </div>
       </div>
     </main>
