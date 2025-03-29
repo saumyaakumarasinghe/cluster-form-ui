@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
 import { Button } from "@/components/ui/button";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 export default function Details() {
-    const router = useRouter();
+  const router = useRouter();
 
   return (
     <main className="p-6 max-w-2xl mx-auto">
@@ -48,10 +48,16 @@ export default function Details() {
 
         {/* Buttons */}
         <div className="mt-6 flex justify-between px-2 max-w-sm mx-auto">
-          <Button onClick={() => router.push('/')} className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
+          <Button
+            onClick={() => router.push("/")}
+            className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+          >
             Cancel
           </Button>
-          <Button onClick={() => router.push('/cluster')} className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
+          <Button
+            onClick={() => router.push("/cluster")}
+            className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+          >
             Done
           </Button>
         </div>
