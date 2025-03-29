@@ -7,6 +7,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { Spinner } from "@/components/ui/spinner";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const formSchema = z.object({
   link: z.string().nonempty("Link is required"),
@@ -22,6 +24,7 @@ const formSchema = z.object({
 
 export default function Home() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   // Defined form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -38,6 +41,8 @@ export default function Home() {
     console.log(values);
 
     try {
+      setIsLoading(true);
+
       const data = await axios({
         method: "post",
         // url: 'http://127.0.0.1:5000/api/health',
@@ -57,6 +62,8 @@ export default function Home() {
       );
     } catch (error) {
       console.error("Error submitting form:", error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -89,9 +96,13 @@ export default function Home() {
                   </FormItem>
                 )}
               />
-              <Button className="w-full bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
-                Submit
-              </Button>
+              {!isLoading ? (
+                <Button className="w-full bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
+                  Submit
+                </Button>
+              ) : (
+                <Spinner size="large" />
+              )}
             </div>
           </form>
         </Form>
