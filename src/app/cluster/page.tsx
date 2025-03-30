@@ -20,6 +20,10 @@ import { useState } from "react";
 
 const formSchema = z.object({
   link: z.string().nonempty("Link is required"),
+  column: z
+    .string()
+    .regex(/^[A-Za-z]{1,4}$/, "Column ID must below 4 letters")
+    .nonempty("Column is required"),
 });
 
 export default function Home() {
@@ -31,7 +35,7 @@ export default function Home() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       link: "",
-      //
+      column: "",
     },
   });
 
@@ -49,7 +53,7 @@ export default function Home() {
         url: "http://127.0.0.1:5000/api/spreadsheet/clustering",
         data: {
           link: values.link,
-          //
+          column: values.column,
         },
       });
 
@@ -89,6 +93,22 @@ export default function Home() {
                       <Input
                         className="w-full p-4 text-lg border border-gray-300 rounded-lg"
                         placeholder="Place your Google Sheet link here"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="column"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        className="w-full p-4 text-lg border border-gray-300 rounded-lg"
+                        placeholder="Enter column ID"
                         {...field}
                       />
                     </FormControl>
