@@ -1,11 +1,15 @@
+// Landing Page: Welcomes users and introduces the ClusterForm app
 "use client";
 
+// Import React and UI components
 import React from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+// Main component for the landing page
 export default function Home() {
+  // Next.js router instance for navigation
   const router = useRouter();
 
   return (
@@ -29,7 +33,7 @@ export default function Home() {
       </div>
 
       <div className="max-w-6xl w-full mx-auto px-4 flex items-center justify-between relative z-10">
-        {/* Text Content Section */}
+        {/* Text Content Section: App introduction and call to action */}
         <div className="w-1/2 pr-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-6">
             Welcome to ClusterForm
@@ -45,6 +49,7 @@ export default function Home() {
             a few clicks.
           </p>
 
+          {/* Button to start the process, navigates to details page */}
           <Button
             onClick={() => router.push("/details")}
             className="bg-black text-white px-20 py-1 rounded-lg text-lg hover:bg-gray-800 transition-colors duration-300"
@@ -53,7 +58,7 @@ export default function Home() {
           </Button>
         </div>
 
-        {/* Network Visualization Section */}
+        {/* Network Visualization Section: Shows a sample visualization image */}
         <div className="w-1/2 flex justify-center items-center">
           <Image
             src="/images/landing-page.png"
